@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الألبومات</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top-nav">
+    <h1>💿 الألبومات</h1>
+    <a href="index.html" class="nav-btn">الرئيسية</a>
+</header>
+
+<section class="songs-grid">
+
+<!-- ألبوم الهوى سلطان -->
+<div class="song-card">
+    <img src="images/el_hawa_sultan_album.jpg" alt="الهوى سلطان">
+    <h3>الهوى سلطان</h3>
+    <button onclick="playSongPage('half_elamar.mp3','حلف القمر','half_elamar.jpg')">▶ حلف القمر</button>
+    <button onclick="playSongPage('el_hawa_sultan.mp3','الهوى سلطان','el_hawa_sultan.jpg')">▶ الهوى سلطان</button>
+</div>
+
+<!-- ألبوم كلام الناس -->
+<div class="song-card">
+    <img src="images/kalam_el_nas_album.jpg" alt="كلام الناس">
+    <h3>كلام الناس</h3>
+    <button onclick="playSongPage('ma_t2olou_leh.mp3','ما تقوله ليه','ma_t2olou_leh.jpg')">▶ ما تقوله ليه</button>
+    <button onclick="playSongPage('kalam_el_nas.mp3','كلام الناس','kalam_el_nas.jpg')">▶ كلام الناس</button>
+    <button onclick="playSongPage('khesert_kol_el_nas.mp3','خسرت كل الناس','khesert_kol_el_nas.jpg')">▶ خسرت كل الناس</button>
+</div>
+
+</section>
+
+<div class="player-bar">
+    <span id="nowPlaying">🎵 لا يوجد شيء يعمل</span>
+    <button id="stopBtn">⏹</button>
+</div>
+
+<script src="songs.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

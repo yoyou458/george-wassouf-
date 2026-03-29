@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تسجيل الدخول / إنشاء حساب</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ====== Login Card ====== */
+body {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:linear-gradient(135deg,#1DB954,#191414);
+}
+
+.login-box{
+    background:#181818;
+    padding:40px 30px;
+    border-radius:15px;
+    box-shadow:0 0 30px rgba(0,0,0,0.5);
+    text-align:center;
+    width:320px;
+    animation:fadeIn 1s ease-in-out;
+}
+
+.login-box h2,h3{
+    margin-bottom:20px;
+    color:#1ED760;
+}
+
+.login-box input{
+    width:100%;
+    padding:12px 15px;
+    margin:10px 0;
+    border-radius:50px;
+    border:none;
+    outline:none;
+    background:#121212;
+    color:#fff;
+}
+
+.login-box button{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:50px;
+    background:#1ED760;
+    color:#000;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.login-box button:hover{
+    background:#1DB954;
+}
+
+/* ====== Animation ====== */
+@keyframes fadeIn{
+    0%{opacity:0;transform:translateY(-20px);}
+    100%{opacity:1;transform:translateY(0);}
+}
+</style>
+</head>
+<body>
+
+<div class="login-box">
+    <h2>تسجيل الدخول</h2>
+    <input type="text" id="loginUser" placeholder="اسم المستخدم">
+    <input type="password" id="loginPass" placeholder="كلمة المرور">
+    <button onclick="login()">دخول</button>
+
+    <hr style="margin:20px 0; border-color:#1ED760;">
+
+    <h3>إنشاء حساب</h3>
+    <input type="text" id="regUser" placeholder="اسم مستخدم جديد">
+    <input type="password" id="regPass" placeholder="كلمة مرور">
+    <button onclick="register()">إنشاء حساب</button>
+</div>
+
+<script>
+function register(){
+    let user = document.getElementById("regUser").value;
+    let pass = document.getElementById("regPass").value;
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    if(users.find(u=>u.user===user)){
+        alert("اسم المستخدم موجود بالفعل");
+        return;
+    }
+    users.push({user,pass});
+    localStorage.setItem("users",JSON.stringify(users));
+    alert("تم إنشاء الحساب ✅");
+}
+
+function login(){
+    let user = document.getElementById("loginUser").value;
+    let pass = document.getElementById("loginPass").value;
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    let found = users.find(u=>u.user===user && u.pass===pass);
+    if(found){
+        localStorage.setItem("loggedIn", user);
+        alert("تم تسجيل الدخول 🎉");
+        window.location.href = "profile.html"; // ينقلك مباشرة لصفحة البروفايل
+    } else alert("بيانات خاطئة ❌");
+}
+</script>
+
+</body>
+</html>

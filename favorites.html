@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>المفضلة</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top-nav">
+    <h1>المفضلة ❤️</h1>
+    <a href="index.html" class="nav-btn">الرئيسية</a>
+    <a href="profile.html" class="nav-btn">الملف الشخصي</a>
+</header>
+
+<section id="favContainer" class="songs-grid"></section>
+
+<script src="songs.js"></script>
+<script src="script.js"></script>
+<script>
+const container = document.getElementById("favContainer");
+let fav = JSON.parse(localStorage.getItem("fav")) || [];
+
+fav.forEach(title=>{
+    const song = songs.find(s=>s.title===title);
+    if(song){
+        const card = document.createElement("div");
+        card.className = "song-card";
+        card.innerHTML = `
+            <img src="images/${song.img}" alt="${song.title}">
+            <h3>${song.title}</h3>
+            <button onclick="openSongPage('${song.title}','${song.file}','${song.img}')">▶ عرض الأغنية</button>
+        `;
+        container.appendChild(card);
+    }
+});
+
+function openSongPage(title,file,img){
+    localStorage.setItem("currentSong", JSON.stringify({title,file,img}));
+    window.location.href = "songPage.html";
+}
+</script>
+
+</body>
+</html>

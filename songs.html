@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الأغاني</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.songs-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+    gap:20px;
+    padding:20px;
+}
+
+.song-card{
+    background:#181818;
+    border-radius:15px;
+    padding:10px;
+    text-align:center;
+    box-shadow:0 0 15px rgba(0,0,0,0.5);
+    transition:0.3s;
+}
+
+.song-card:hover{
+    transform:scale(1.05);
+}
+
+.song-card img{
+    width:100%;
+    border-radius:15px;
+    margin-bottom:10px;
+}
+
+.song-card h3{
+    color:#fff;
+    margin-bottom:10px;
+}
+
+.song-card button{
+    padding:8px 12px;
+    border:none;
+    border-radius:50px;
+    background:#1ED760;
+    color:#000;
+    font-weight:bold;
+    cursor:pointer;
+    margin:2px;
+}
+</style>
+</head>
+<body>
+
+<header class="top-nav">
+    <h1>🎵 الأغاني</h1>
+    <a href="index.html" class="nav-btn">الرئيسية</a>
+    <a href="albums.html" class="nav-btn">الألبومات</a>
+</header>
+
+<section class="songs-grid" id="songsGrid">
+    <!-- الأغاني هتتضاف هنا ديناميكيًا -->
+</section>
+
+<div class="player-bar">
+    <span id="nowPlaying">🎵 لا يوجد شيء يعمل</span>
+    <audio id="audioPlayer" controls style="width:100%;margin-top:10px;"></audio>
+</div>
+
+<script src="songs.js"></script>
+<script>
+const grid = document.getElementById("songsGrid");
+const player = document.getElementById("audioPlayer");
+const nowPlaying = document.getElementById("nowPlaying");
+
+songs.forEach(s => {
+    const card = document.createElement("div");
+    card.classList.add("song-card");
+    card.innerHTML = `
+        <img src="${s.img}" alt="${s.name}">
+        <h3>${s.name}</h3>
+        <button onclick="playSong('${s.file}','${s.name}')">▶ تشغيل</button>
+    `;
+    grid.appendChild(card);
+});
+
+function playSong(file,name){
+    player.src = file;
+    player.play();
+    nowPlaying.innerText = "🎵 الآن يشغل: " + name;
+}
+</script>
+
+</body>
+</html>

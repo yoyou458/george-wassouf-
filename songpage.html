@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>تفاصيل الأغنية</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top-nav">
+    <h1 id="songTitle">🎵 أغنية</h1>
+    <a href="songs.html" class="nav-btn">الأغاني</a>
+    <a href="favorites.html" class="nav-btn">المفضلة ❤️</a>
+</header>
+
+<section class="song-detail">
+    <div class="song-card" style="margin:auto;max-width:400px;text-align:center;">
+        <img id="songImg" src="" alt="" style="width:100%;border-radius:10px;margin-bottom:10px;">
+        <h2 id="songName">اسم الأغنية</h2>
+        <audio id="songPlayer" controls style="width:100%"></audio>
+        <button id="favBtn">❤️ حفظ للمفضلة</button>
+    </div>
+</section>
+
+<script src="songs.js"></script>
+<script>
+let data = JSON.parse(localStorage.getItem("currentSong"));
+const songName = document.getElementById("songName");
+const songPlayer = document.getElementById("songPlayer");
+const songImg = document.getElementById("songImg");
+const favBtn = document.getElementById("favBtn");
+
+if(data){
+    songName.innerText = data.title;
+    songPlayer.src = "songs/" + data.file;
+    songImg.src = "images/" + data.img;
+}
+
+favBtn.onclick = ()=>{
+    let fav = JSON.parse(localStorage.getItem("fav")) || [];
+    if(!fav.includes(data.title)){
+        fav.push(data.title);
+        localStorage.setItem("fav", JSON.stringify(fav));
+        alert("تم الحفظ ❤️");
+    }else alert("الأغنية موجودة بالفعل في المفضلة");
+}
+</script>
+
+</body>
+</html>

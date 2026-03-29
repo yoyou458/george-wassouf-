@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صفحة المستخدم</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    background:linear-gradient(135deg,#1DB954,#191414);
+    min-height:100vh;
+    padding-top:50px;
+}
+
+.profile-card{
+    background:#181818;
+    padding:30px 40px;
+    border-radius:15px;
+    box-shadow:0 0 30px rgba(0,0,0,0.5);
+    width:350px;
+    text-align:center;
+    animation:fadeIn 1s ease-in-out;
+}
+
+.profile-card h2{
+    color:#1ED760;
+    margin-bottom:15px;
+}
+
+.profile-card p{
+    color:#fff;
+    margin:10px 0;
+}
+
+.profile-card button{
+    padding:10px 20px;
+    border:none;
+    border-radius:50px;
+    background:#1ED760;
+    color:#000;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:15px;
+}
+</style>
+</head>
+<body>
+
+<div class="profile-card">
+    <h2 id="username">مرحبا</h2>
+    <p>هذه هي صفحتك الشخصية.</p>
+    <p>يمكنك مشاهدة الأغاني المفضلة لديك لاحقًا وحفظ أغاني جديدة.</p>
+    <button onclick="logout()">تسجيل الخروج</button>
+</div>
+
+<script>
+let user = localStorage.getItem("loggedIn");
+if(!user){
+    alert("يرجى تسجيل الدخول أولًا!");
+    window.location.href="login.html";
+} else{
+    document.getElementById("username").innerText = "مرحبا " + user + " 🎶";
+}
+
+function logout(){
+    localStorage.removeItem("loggedIn");
+    alert("تم تسجيل الخروج ✅");
+    window.location.href="login.html";
+}
+</script>
+
+</body>
+</html>
